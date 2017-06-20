@@ -1,0 +1,15 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 1
+
+xpack.watcher.enabled: false
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
+xpack.notification.slack:
+  account:
+    test_monitoring:
+      url: https://hooks.slack.com/services/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

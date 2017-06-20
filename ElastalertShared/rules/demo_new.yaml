@@ -1,0 +1,52 @@
+# Alert when a login event is detected for user "admin" never before seen IP
+# In this example, "login" logs contain which user has logged in from what IP
+
+# (Optional)
+# Elasticsearch host
+# es_host: elasticsearch.example.com
+
+# (Optional)
+# Elasticsearch port
+# es_port: 14900
+
+# (OptionaL) Connect with SSL to Elasticsearch
+#use_ssl: True
+
+# (Optional) basic-auth username and password for Elasticsearch
+#es_username: someusername
+#es_password: somepassword
+
+# (Required)
+# Rule name, must be unique
+name: Demo rule
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: new_term
+
+# (Required)
+# Index to search, wildcard supported
+index: logs
+
+# (Required, new_term specific)
+# Monitor the field ip_address
+fields:
+ - "_id"
+
+buffer_time:
+  hours: 6
+realert:
+  minutes: 0
+
+alert:
+- "slack"
+
+alert_text: "Something happened on MAGASIN: {0} at {1}: {2} - {3}"
+alert_text_type: alert_text_only
+alert_text_args: ["magasin_id", "@timestamp", "commentaire", "additional_data"]
+
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "@vmagrez"
+
+include: ["@timestamp", "magasin_id", "commentaire" ,"additional_data"]
