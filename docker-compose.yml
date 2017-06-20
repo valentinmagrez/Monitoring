@@ -15,8 +15,6 @@ services:
       - xpack.monitoring.enabled=false
       - xpack.graph.enabled=false
       - xpack.watcher.enabled=false
-    networks:
-      - docker_elk
   kibana:
     build: kibana/
     volumes:
@@ -25,8 +23,6 @@ services:
       - "5601:5601"
     environment:
       - TZ=Europe/Paris
-    networks:
-      - docker_elk
     depends_on:
       - elasticsearch
       # Docker image available from Docker Hub.
@@ -47,8 +43,3 @@ services:
         - ELASTICSEARCH_HOST=elasticsearch_host
         - ELASTICSEARCH_PORT=9200
         - TZ=Europe/Paris
-      networks:
-        - docker_elk
-networks:
-  docker_elk:
-    driver: bridge
