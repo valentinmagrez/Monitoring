@@ -46,7 +46,7 @@ alert_text: "Something happened on MAGASIN: {0} at {1}: {2} - {3}"
 alert_text_type: alert_text_only
 alert_text_args: ["magasin_id", "@timestamp", "commentaire", "additional_data"]
 
-slack_webhook_url: "https://hooks.slack.com/services/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"
-slack_channel_override: "@vmagrez"
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "#errors"
 
 include: ["@timestamp", "magasin_id", "commentaire" ,"additional_data"]
