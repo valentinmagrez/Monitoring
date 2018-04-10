@@ -1,23 +1,19 @@
-version: '2'
+version: '3'
 
 services:
   elasticsearch:
-    build: elasticsearch/
+    image: elasticsearch:5.2.2
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./elasticsearch/data:/usr/share/elasticsearch/
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
       - TZ=Europe/Paris
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
-      - xpack.security.enabled=false
-      - xpack.monitoring.enabled=false
-      - xpack.graph.enabled=false
-      - xpack.watcher.enabled=false
   kibana:
-    build: kibana/
+    image: kibana:5.2.2
     volumes:
       - ./kibana/config/:/usr/share/kibana/config
     ports:
@@ -26,21 +22,3 @@ services:
       - TZ=Europe/Paris
     depends_on:
       - elasticsearch
-      # Docker image available from Docker Hub.
-  elastalert:
-      build: ElastalertShared/
-      cap_add:
-        - SYS_TIME
-        - SYS_NICE
-      volumes:
-        - ./ElastalertShared/logs:/opt/logs
-        - ./ElastalertShared/rules:/opt/rules
-        - ./ElastalertShared/config:/opt/config
-      depends_on:
-        - elasticsearch
-      links:
-        - elasticsearch:elasticsearch_host
-      environment:
-        - ELASTICSEARCH_HOST=elasticsearch_host
-        - ELASTICSEARCH_PORT=9200
-        - TZ=Europe/Paris
