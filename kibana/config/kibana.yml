@@ -5,6 +5,8 @@
 server.name: kibana
 server.host: "0"
 elasticsearch.url: http://elasticsearch:9200
+server.basePath: /kibana
+setup.kibana.path: /kibana
 
 ## Disable X-Pack
 ## see https://www.elastic.co/guide/en/x-pack/current/xpack-settings.html
@@ -14,3 +16,4 @@ xpack.security.enabled: false
 xpack.monitoring.enabled: false
 xpack.graph.enabled: false
 xpack.reporting.enabled: false
+
